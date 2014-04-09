@@ -17,4 +17,8 @@ public enum Line {
     public String toString() {
         return this.name().substring(5);
     }
+
+    public static Line getLineForIndex(int index) {
+        return values()[index];
+    }
 }

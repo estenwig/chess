@@ -1,5 +1,9 @@
 package esben.chess.core.model;
 
+import java.util.Objects;
+
+import static com.google.common.base.Objects.toStringHelper;
+
 public class Move {
     private Square from;
     private Square to;
@@ -34,4 +38,19 @@ public class Move {
     public static Move createMove(Square from, Square to) {
         return new Move(from,to);
     }
+
+    @Override
+    public String toString() {
+        return toStringHelper(this)
+                .add("from", from)
+                .add("to", to)
+                .toString();
+    }
+//    @Override
+//    public String toString() {
+//        return "Move{" +
+//                "from=" + from +
+//                ", to=" + to +
+//                '}';
+//    }
 }

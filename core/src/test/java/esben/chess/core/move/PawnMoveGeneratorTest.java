@@ -13,12 +13,10 @@ import static esben.chess.core.model.Square.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by stenwesb on 04.04.14.
- */
 public class PawnMoveGeneratorTest {
     Board board = new Board();
     PawnMoveGenerator moveGenerator = new PawnMoveGenerator();
+
     @Before
     public void setUp() throws Exception {
 
@@ -27,10 +25,12 @@ public class PawnMoveGeneratorTest {
     @Test
     public void testGenerateMoves() throws Exception {
         Square b2 = getSquareFor("b2");
-        Square c1 = getSquareFor("c1");
-        Square c2 = getSquareFor("c2");
+        Square b3 = getSquareFor("b3");
+        Square b4 = getSquareFor("c4");
         Square c3 = getSquareFor("c3");
+        board.setPieceAt(b2, Piece.WHITE_PAWN);
         List<Move> moves = moveGenerator.generateMoves(b2, board);
-        assertThat(moves, hasItems(createMove(b2, c1),createMove(b2, c2),createMove(b2, c3)));
+        System.out.println(moves);
+        assertThat(moves, hasItems(createMove(b2, b3),createMove(b2, b4)));
     }
 }

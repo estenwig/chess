@@ -36,8 +36,7 @@ public class Square {
     @Override
     public String toString() {
         return toStringHelper(this)
-                .addValue(row)
-                .addValue(line)
+                .addValue(""+line+row)
                 .toString();
     }
 
@@ -78,5 +77,13 @@ public class Square {
             squares.add(getSquareFor(string));
         }
         return squares;
+    }
+
+    public Row getRow() {
+        return row;
+    }
+
+    public Line getLine() {
+        return line;
     }
 }

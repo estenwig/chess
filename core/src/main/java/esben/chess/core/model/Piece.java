@@ -25,4 +25,12 @@ public enum Piece {
 
     private Color color;
     private PieceType pieceType;
+
+    public Color getColor() {
+        return color;
+    }
+
+    public PieceType getPieceType() {
+        return pieceType;
+    }
 }
