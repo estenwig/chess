@@ -15,9 +15,9 @@ import static esben.chess.core.model.Row.getRowForIndex;
 import static esben.chess.core.model.Square.createSquare;
 
 public class Directions {
-    public static Set<Move> movesForward(Square square, Direction direction, int distanceInput) {
+    public static Set<Move> createMoves(Square square, Direction direction, int distanceLimit) {
         Set<Move> moves = Sets.newHashSet();
-        for (int distance = 1; distance <= distanceInput; distance++) {
+        for (int distance = 1; distance <= distanceLimit; distance++) {
             Optional<Move> move = createMove(square, direction, distance);
             if (move.isPresent()) {
                 moves.add(move.get());
@@ -30,6 +30,15 @@ public class Directions {
         Optional<Square> squareBasedOn = getSquareBasedOn(square, direction, distance);
         if (squareBasedOn.isPresent()) {
             return Optional.of(Move.createMove(square, squareBasedOn.get()));
+        } else {
+            return Optional.absent();
+        }
+    }
+
+    public static Optional<Move> createMove(Square from, Direction direction) {
+        Optional<Square> squareBasedOn = getSquareBasedOn(from, direction, 1);
+        if (squareBasedOn.isPresent()) {
+            return Optional.of(Move.createMove(from, squareBasedOn.get()));
         } else {
             return Optional.absent();
         }
@@ -59,21 +68,4 @@ public class Directions {
         return originalIndex + (offset * distance);
     }
 
-    public static Set<Move> movesBackward(Square s, int distance) {
-        HashSet<Move> moves = Sets.newHashSet();
-
-        int lineIndex = s.getLine().getIndex();
-        int rowIndex = s.getRow().getIndex();
-        for (int i = 1; i <= distance; i++) {
-            try {
-                Row rowForIndex = getRowForIndex(rowIndex + i);
-                moves.add(Move.createMove(s, createSquare(s.getLine(), rowForIndex)));
-            } catch (ArrayIndexOutOfBoundsException e) {
-                //okay,
-                System.out.println("Skipping index that is outside the board.");
-            }
-        }
-
-        return moves;
-    }
 }

@@ -1,5 +1,7 @@
 package esben.chess.core.model;
 
+import com.google.common.collect.Multimaps;
+
 import java.util.*;
 
 import static com.google.common.base.Objects.toStringHelper;

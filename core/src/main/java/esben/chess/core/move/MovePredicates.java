@@ -2,12 +2,18 @@ package esben.chess.core.move;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import esben.chess.core.model.*;
+import esben.chess.core.model.Board;
+import esben.chess.core.model.Move;
+import esben.chess.core.model.Piece;
 
 import javax.annotation.Nullable;
 
-import static esben.chess.core.model.Color.*;
-import static esben.chess.core.model.Row.*;
+import java.math.MathContext;
+
+import static esben.chess.core.model.Color.BLACK;
+import static esben.chess.core.model.Color.WHITE;
+import static esben.chess.core.model.Row.ROW_2;
+import static esben.chess.core.model.Row.ROW_7;
 
 public class MovePredicates {
 
@@ -38,9 +44,28 @@ public class MovePredicates {
         return new Predicate<Move>() {
             @Override
             public boolean apply(@Nullable Move input) {
-                return (WHITE.equals(piece.getColor()) && ROW_2.equals(input.getFrom().getRow()))||
+                return (WHITE.equals(piece.getColor()) && ROW_2.equals(input.getFrom().getRow())) ||
                         (BLACK.equals(piece.getColor()) && ROW_7.equals(input.getFrom().getRow()));
             }
         };
+    }
+
+    public static Predicate<Move> pathIsClear(Board board, Piece piece) {
+        // moveIsInAStraigthLine && traverserLinjen og spør hver enkelt square om de er tomme.
+        return Predicates.and(new Predicate<Move>() {
+                                  @Override
+                                  public boolean apply(@Nullable Move input) {
+                                      int lineMovement = input.getTo().getLine().getIndex() - input.getFrom().getLine().getIndex();
+                                      Integer rowMovement = input.getTo().getRow().getIndex() - input.getFrom().getRow().getIndex();
+
+                                      return false;
+                                  }
+                              }, new Predicate<Move>() {
+                                  @Override
+                                  public boolean apply(@Nullable Move input) {
+                                      return false;
+                                  }
+                              }
+        );
     }
 }

@@ -6,11 +6,12 @@ import esben.chess.core.model.Piece;
 import esben.chess.core.model.Square;
 
 import java.util.List;
+import java.util.Set;
 
 public class MoveValidator {
 
     public void validate(Move move, Piece dst, Board board) {
-        List<Move> moves = new PawnMoveGenerator().generateMoves(move.getFrom(), board);
+        Set<Move> moves = new PawnMoveGenerator().generateMoves(move.getFrom(), board);
 
     }
 }
