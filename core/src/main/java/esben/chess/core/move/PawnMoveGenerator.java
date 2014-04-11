@@ -6,12 +6,8 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Sets;
 import esben.chess.core.model.*;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
-import static esben.chess.core.model.Move.createMove;
 import static esben.chess.core.move.Direction.*;
 
 /*
@@ -32,7 +28,7 @@ public class PawnMoveGenerator {
         Predicate<Move> isTargetSquareEmpty = MovePredicates.isTargetSquareEmpty(board);
         Predicate<Move> targetSquareContainOpponentPiece = MovePredicates.targetSquareContainOpponentPiece(board, piece);
         Predicate<Move> isStartingSquarePawnStartingRow = MovePredicates.isStartingSquarePawnStartingRow(piece);
-        Predicate<Move> pathIsClear = MovePredicates.pathIsClear(board, piece);
+        Predicate<Move> pathIsClear = MovePredicates.pathIsClear(board);
 
         Predicate<Move> twoMovesRule = Predicates.and(isStartingSquarePawnStartingRow, isTargetSquareEmpty, pathIsClear);
         Set<Move> legalMoves = Sets.newLinkedHashSet();

@@ -7,7 +7,6 @@ import esben.chess.core.model.Move;
 import esben.chess.core.model.Row;
 import esben.chess.core.model.Square;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import static esben.chess.core.model.Line.getLineForIndex;
@@ -35,6 +34,7 @@ public class Directions {
         }
     }
 
+    //TODO: Forandre til å legge med alle squares som er med i Move..!!
     public static Optional<Move> createMove(Square from, Direction direction) {
         Optional<Square> squareBasedOn = getSquareBasedOn(from, direction, 1);
         if (squareBasedOn.isPresent()) {

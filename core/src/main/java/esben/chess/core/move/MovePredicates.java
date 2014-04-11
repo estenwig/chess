@@ -5,6 +5,7 @@ import com.google.common.base.Predicates;
 import esben.chess.core.model.Board;
 import esben.chess.core.model.Move;
 import esben.chess.core.model.Piece;
+import esben.chess.core.model.Square;
 
 import javax.annotation.Nullable;
 
@@ -50,22 +51,15 @@ public class MovePredicates {
         };
     }
 
-    public static Predicate<Move> pathIsClear(Board board, Piece piece) {
-        // moveIsInAStraigthLine && traverserLinjen og spør hver enkelt square om de er tomme.
-        return Predicates.and(new Predicate<Move>() {
-                                  @Override
-                                  public boolean apply(@Nullable Move input) {
-                                      int lineMovement = input.getTo().getLine().getIndex() - input.getFrom().getLine().getIndex();
-                                      Integer rowMovement = input.getTo().getRow().getIndex() - input.getFrom().getRow().getIndex();
-
-                                      return false;
-                                  }
-                              }, new Predicate<Move>() {
-                                  @Override
-                                  public boolean apply(@Nullable Move input) {
-                                      return false;
-                                  }
-                              }
-        );
+    public static Predicate<Move> pathIsClear(final Board board) {
+        return new Predicate<Move>() {
+            @Override
+            public boolean apply(@Nullable Move input) {
+                for (Square square : input.intermediateSquares()) {
+                    if (!board.isFree(square)) return false;
+                }
+                return true;
+            }
+        };
     }
 }
