@@ -37,7 +37,7 @@ public class MovePredicates {
     }
 
     public static Predicate<Move> targetSquareContainOpponentPiece(final Board board, final Piece piece) {
-        return Predicates.and(isTargetSquareEmpty(board),
+        return Predicates.and(Predicates.not(isTargetSquareEmpty(board)),
                 targetSquarePieceIsOpponent(board, piece));
     }
 
