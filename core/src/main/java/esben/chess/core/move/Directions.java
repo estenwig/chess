@@ -46,12 +46,11 @@ public class Directions {
 
 
     private static Optional<Square> getSquareBasedOn(Square s, Direction direction, int distance) {
-        Row rowForIndex = getRowForIndex(calculateNewRowIndex(s, direction, distance));
-        Line lineForIndex = getLineForIndex(calculateNewLineIndex(s, direction, distance));
         try {
+            Row rowForIndex = getRowForIndex(calculateNewRowIndex(s, direction, distance));
+            Line lineForIndex = getLineForIndex(calculateNewLineIndex(s, direction, distance));
             return Optional.of(createSquare(lineForIndex, rowForIndex));
         } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
             return Optional.absent();
         }
     }

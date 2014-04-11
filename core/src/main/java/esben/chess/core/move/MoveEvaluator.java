@@ -15,11 +15,12 @@ public class MoveEvaluator {
         return Collections.emptySet();
     }
 
-    public static Set<Move> evaluate(HashSet<Optional<Move>> possibleMoves, Predicate<Move> predicate) {
+    public static Set<Move> evaluate(Set<Optional<Move>> possibleMoves, Predicate<Move> predicate) {
         LinkedHashSet<Move> moves = Sets.newLinkedHashSet();
         for (Optional<Move> possibleMove : possibleMoves) {
             moves.addAll(evaluate(possibleMove, predicate));
         }
         return moves;
     }
+
 }

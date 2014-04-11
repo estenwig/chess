@@ -36,7 +36,7 @@ public class MovePredicates {
     }
 
     public static Predicate<Move> targetSquareContainOpponentPiece(final Board board, final Piece piece) {
-        return Predicates.and(isTargetSquareEmpty(board),
+        return Predicates.and(Predicates.not(isTargetSquareEmpty(board)),
                 targetSquarePieceIsOpponent(board, piece));
     }
 
@@ -50,7 +50,7 @@ public class MovePredicates {
         };
     }
 
-    public static Predicate<Move> pathIsClear(Board board, Piece piece) {
+    public static Predicate<Move> pathIsClear(final Board board, final Piece piece) {
         // moveIsInAStraigthLine && traverserLinjen og spør hver enkelt square om de er tomme.
         return Predicates.and(new Predicate<Move>() {
                                   @Override
@@ -68,4 +68,5 @@ public class MovePredicates {
                               }
         );
     }
+
 }

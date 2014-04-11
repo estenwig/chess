@@ -35,6 +35,14 @@ public class Move {
         this.squares.subList(1, lastIndex);
     }
 
+    public Move(List<Square> squares) {
+        Preconditions.checkState(squares.size() >= 2, "Must contain at least two squares!");
+        this.squares = squares;
+        int lastIndex = this.squares.size() - 1;
+        this.squares.subList(1, lastIndex);
+    }
+
+
     public Square getFrom() {
         return this.squares.get(0);
     }
